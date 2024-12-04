@@ -115,29 +115,25 @@ def game():
         choice = input("Do you want to [H]it, [S]tand, or [Q]uit: ").lower()
         clear()
         
-        # Loop to allow multiple hits until the player stands or busts
         while choice == "h":
             hit(player_hand, deck)
             print("You have a " + str(player_hand) + " for a total of " + str(total(player_hand)))
             
-            # If the player busts (total > 21), break out of the loop
             if total(player_hand) > 21:
                 print("You busted!")
                 print_results(dealer_hand, player_hand)
                 play_again()
-                return  # Exit the function
+                return  
             
             choice = input("Do you want to [H]it, [S]tand, or [Q]uit: ").lower()
             clear()
         
-        # If the player stands, the dealer hits until total >= 17
         if choice == "s":
             while total(dealer_hand) < 17:
                 hit(dealer_hand, deck)
             score(dealer_hand, player_hand)
             play_again()
         
-        # If the player chooses to quit, end the game
         elif choice == "q":
             print("Bye!")
             exit()
