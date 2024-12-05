@@ -4,7 +4,11 @@ class Game:
     def __init__(self, rows, cols):
         self.rows = rows
         self.cols = cols
-        self.player_pos = [0, 0]  # Starting position at the top-left corner
+        self.player_pos = [0, 0] 
+        self.black_jack = [,]
+        self.roulette = [,]
+        self.texas = [,]
+        self.slot_machine = [,]
         self.map = self.create_map()
 
     def create_map(self):
