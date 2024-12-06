@@ -1,14 +1,13 @@
 import os
-
+"""         self.black_jack = [,]
+        self.roulette = [,]
+        self.texas = [,]
+        self.slot_machine = [,] """
 class Game:
     def __init__(self, rows, cols):
         self.rows = rows
         self.cols = cols
         self.player_pos = [0, 0] 
-        self.black_jack = [,]
-        self.roulette = [,]
-        self.texas = [,]
-        self.slot_machine = [,]
         self.map = self.create_map()
 
     def create_map(self):
@@ -23,7 +22,6 @@ class Game:
 
         x, y = self.player_pos
         self.map[x][y] = "😎 "
-
         for row in self.map:
             print("".join(row))
         self.map[x][y] = " - "
