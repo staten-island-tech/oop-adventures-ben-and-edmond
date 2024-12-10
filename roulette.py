@@ -38,7 +38,7 @@ def check_12(number):
 
 def payout(bet_type, bet_value, result):
     """Calculates the payout based on the bet type and result."""
-    if bet_type == "red_black":
+    if bet_type == "color":
         if check_red_or_black(result) == bet_value:
             return 2  # 1:1 payout, so you win double
         else:
@@ -50,51 +50,57 @@ def payout(bet_type, bet_value, result):
         else:
             return 0  # Lose the bet
 
-    elif bet_type == "12":
+    elif bet_type == "1st_12":
         if check_12(result) == bet_value:
             return 3  # 2:1 payout, so you win double the bet
         else:
             return 0  # Lose the bet
 
+
 def main():
-    print("Welcome to Roulette!")
+    print("Welcome to Roulette!")   
     # Prompt the player to choose a bet type
-    bet_type = input("Enter bet type (red_black, number, or 12): ").lower()
-    
-    # Initialize bet_value based on bet_type
-    if bet_type == "red_black":
-        bet_value = input("Enter bet on red or black: ").lower()
-        if bet_value not in ["red", "black"]:
-            print("Invalid input, try again.")
+    while True:
+        bet_type = input("Enter bet type (color, number, or 1st_12): ").lower()
+        
+        # Initialize bet_value based on bet_type
+        if bet_type == "color":
+            bet_value = input("Enter bet on red, black, or green: ").lower()
+            if bet_value not in ["red", "black", "green"]:
+                print("Invalid input, try again.")
+                return
+        elif bet_type == "number":
+            bet_value = int(input("Enter a number to bet on (1-36): "))
+            if bet_value < 1 or bet_value > 36:
+                print("Invalid number, must be between 1 and 36.")
+                return
+        elif bet_type == "1st_12":
+            bet_value = input("Enter bet on first 12, second 12, or third 12: ").lower()
+            if bet_value not in ["first 12", "second 12", "third 12"]:
+                print("Invalid input, try again.")
+                return
+        else:
+            print("Invalid bet type. Please choose red_black, number, or 12.")
             return
-    elif bet_type == "number":
-        bet_value = int(input("Enter a number to bet on (1-36): "))
-        if bet_value < 1 or bet_value > 36:
-            print("Invalid number, must be between 1 and 36.")
-            return
-    elif bet_type == "12":
-        bet_value = input("Enter bet on first 12, second 12, or third 12: ").lower()
-        if bet_value not in ["first 12", "second 12", "third 12"]:
-            print("Invalid input, try again.")
-            return
-    else:
-        print("Invalid bet type. Please choose red_black, number, or 12.")
-        return
-    
-    # Prompt the player to enter a bet amount
-    bet_amount = int(input("Enter your bet amount: $"))
-    
-    # Spin the wheel and determine the result
-    result = spin_wheel()
-    print(f"The wheel spun: {result}")
-    
-    # Determine the payout and display the result
-    winnings = payout(bet_type, bet_value, result)
-    
-    if winnings > 0:
-        print(f"You win! You won ${winnings * bet_amount}.")
-    else:
-        print(f"You lose! You lost your bet of ${bet_amount}.")
+        
+        # Prompt the player to enter a bet amount
+        bet_amount = int(input("Enter your bet amount: $"))
+        
+        # Spin the wheel and determine the result
+        result = spin_wheel()
+        print(f"The wheel spun: {result}")
+        
+        # Determine the payout and display the result
+        winnings = payout(bet_type, bet_value, result)
+        
+
+        if winnings > 0:
+            print(f"You win! You won ${winnings * bet_amount}.")
+        else:
+            print(f"You lose! You lost your bet of ${bet_amount}.")
+        
+
+
 
 if __name__ == "__main__":
     main()
