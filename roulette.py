@@ -58,7 +58,6 @@ def payout(bet_type, bet_value, result):
 
 def main():
     print("Welcome to Roulette!")
-    
     # Prompt the player to choose a bet type
     bet_type = input("Enter bet type (red_black, number, or 12): ").lower()
     
