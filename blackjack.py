@@ -101,7 +101,7 @@ class Blackjack:
             Blackjack.print_results(dealer_hand, player_hand)
             print("Congratulations. Your score is higher than the dealer. You win\n")
 
-    def game():
+    def bj():
         Blackjack.clear()
         print("WELCOME TO BLACKJACK!\n")
         dealer_hand = Blackjack.deal(deck)
@@ -139,4 +139,4 @@ class Blackjack:
                 exit()
 
 if __name__ == "__main__":
-    Blackjack.game()
+    Blackjack.bj()
