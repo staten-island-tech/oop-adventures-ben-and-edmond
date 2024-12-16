@@ -29,18 +29,31 @@ class roulette:
             return "second_twelve"
         if num in third_twelve:
             return "third_twelve"
+
+    
     
     def main():
         print("Welcome to addiction!")
         while True:
-            bet_input = input("What type of bet would you like to place? (number, color, twelves)").lower()
+            bet_input = input("What type of bet would you like to place? (number, color, twelves)\n").lower()
+            roulette.diceroll()
             if bet_input == "number":
-                
+                roulette.diceroll()                
             elif bet_input == "color":
-
+                while True:
+                    color_input = input("Which color would you like to bet on? (green, red, or black)\n").lower()
+                    if color_input not in ["red","black","green"]:
+                        print("Invalid Color.")
+                        continue
+                    roulette.check_color()
             elif bet_input == "twelves":
-
+                while True:
+                    twelve_input = input("Which twelve would you like to bet on (first, second, third)")
+                    if twelve_input not in ["first","second","third"]:
+                        print("Invalid Twelve.")
+                        continue
             else:
                 print ("Invalid bet type entered, Try again.")
                 return
 
+roulette.main()
