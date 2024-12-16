@@ -63,3 +63,5 @@ make a map using - and make W on the map as a moveable character (editted size o
 ^^^ will be adding symbols for machines / games to be played 
 12/12
 change all instances of text to slot
+12/16
+how to add user input in pygame <-- this didn't really help much although I did take the code for rewards like if x==y==z return money
