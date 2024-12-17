@@ -11,8 +11,9 @@ third_twelve = [25,26,27,28,29,30,31,32,33,34,35,36]
 class roulette:
 
     def diceroll():
-        roll = random.randint(1,38)
-        return roll
+        roll=list(range(38))
+        result=random.choice(roll)
+        return result
 
     def check_color(num):
         if num in red_num:
@@ -30,30 +31,39 @@ class roulette:
         if num in third_twelve:
             return "third_twelve"
 
-    
-    
     def main():
         print("Welcome to addiction!")
+        result = roulette.diceroll()
+        print(result)
         while True:
             bet_input = input("What type of bet would you like to place? (number, color, twelves)\n").lower()
-            roulette.diceroll()
             if bet_input == "number":
-                roulette.diceroll()                
+                while True:
+                    num_input = int(input("Which number would you like to bet on? (1-38)\n"))
+                    if num_input not in list(range(1,39)):
+                        print("Invalid Number.")
+                    if num_input == result:
+                        print("test")
+                        break
             elif bet_input == "color":
                 while True:
                     color_input = input("Which color would you like to bet on? (green, red, or black)\n").lower()
                     if color_input not in ["red","black","green"]:
                         print("Invalid Color.")
-                        continue
-                    roulette.check_color()
+                    if roulette.check_color(result) == color_input:
+                        print("test")
+                        break
             elif bet_input == "twelves":
                 while True:
                     twelve_input = input("Which twelve would you like to bet on (first, second, third)")
                     if twelve_input not in ["first","second","third"]:
                         print("Invalid Twelve.")
-                        continue
+                    if roulette.check_twelve(result) == twelve_input:
+                        print("test")
+                        break
             else:
-                print ("Invalid bet type entered, Try again.")
+                print ("Invalid bet.")
                 return
 
+            
 roulette.main()
