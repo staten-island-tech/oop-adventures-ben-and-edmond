@@ -65,3 +65,6 @@ make a map using - and make W on the map as a moveable character (editted size o
 change all instances of text to slot
 12/16
 how to add user input in pygame <-- this didn't really help much although I did take the code for rewards like if x==y==z return money
+12/17
+why is money not defined (did not help)
+how to add animation (learned the use of pygame.time.get_ticks)
