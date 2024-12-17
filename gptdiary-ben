@@ -1,0 +1,26 @@
+12/17 - Input:
+  while True:
+                bet_amount_input = int(input("How much $ would you like to bet?\n"))
+
+                if bet_amount_input <= roulette.money:
+                    break
+                elif bet_amount_input > roulette.money:
+                    print("You do not have enough $")
+                else:
+                    print("Invalid Bet.")
+
+Make thsi code account for the fact that a user may input something that is not a number (error handling)
+
+Output: 
+while True:
+    try:
+        bet_amount_input = int(input("How much $ would you like to bet?\n"))
+        
+        if bet_amount_input <= roulette.money:
+            break
+        elif bet_amount_input > roulette.money:
+            print("You do not have enough $")
+        else:
+            print("Invalid Bet.")
+    except ValueError:
+        print("Invalid input. Please enter a valid number.")
