@@ -2,7 +2,7 @@ import os
 import pygame
 import random
 import time
-import slots
+import slots #maybe move it to when it runs 
 import blackjack
 """         self.black_jack = [,]
         self.roulette = [,]

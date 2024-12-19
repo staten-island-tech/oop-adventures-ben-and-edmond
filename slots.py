@@ -2,7 +2,7 @@ import os
 import pygame
 import random
 class Slots:
-    
+    pygame.init()
 
     black = (0, 0, 0)
     green = (0, 255, 0)
@@ -10,7 +10,8 @@ class Slots:
     orange = (255, 165, 0)
     white = (255, 255, 255)
     red = (255, 0, 0)
-    
+    screen = pygame.display.set_mode([600, 600])
+    font = pygame.font.Font('freesansbold.ttf', 32)
 
     fruits = ["0", "1", "2", "3", "4"]
     color = [black, green, red, blue, orange]
@@ -54,9 +55,7 @@ class Slots:
             return -self.bet
 
     def game_loop(self):
-        pygame.init()
-        screen = pygame.display.set_mode([600, 600])
-        font = pygame.font.Font('freesansbold.ttf', 32)
+        
         rolling = False
         roll_start_time = 0
         total_roll_time = 200
@@ -108,4 +107,4 @@ class Slots:
             pygame.display.update()
 
 
-Slots().game_loop()
+#Slots().game_loop()
