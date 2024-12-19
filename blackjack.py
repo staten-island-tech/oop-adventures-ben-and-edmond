@@ -1,12 +1,11 @@
-import os
+import os 
 import random
 
-# Initialize deck once at the start of the game
-deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]*4
 class Blackjack:
+    deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]*4
     def deal(deck):
         hand = []
-        random.shuffle(deck)  # Shuffle deck once at the beginning
+        random.shuffle(deck)
         for i in range(2):
             card = deck.pop()
             if card == 11:
@@ -30,7 +29,7 @@ class Blackjack:
 
     def total(hand):
         total = 0
-        ace_count = 0  # Track number of Aces
+        ace_count = 0
         for card in hand:
             if card == "J" or card == "Q" or card == "K":
                 total += 10
@@ -40,7 +39,6 @@ class Blackjack:
             else:
                 total += card
         
-        # Adjust for Aces if total exceeds 21
         while total > 21 and ace_count > 0:
             total -= 10
             ace_count -= 1
@@ -138,5 +136,4 @@ class Blackjack:
                 print("Bye!")
                 exit()
 
-if __name__ == "__main__":
-    Blackjack.bj()
+#Blackjack.bj()

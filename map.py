@@ -1,4 +1,9 @@
 import os
+import pygame
+import random
+import time
+import slots
+import blackjack
 """         self.black_jack = [,]
         self.roulette = [,]
         self.texas = [,]
