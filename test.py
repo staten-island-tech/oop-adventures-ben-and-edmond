@@ -88,9 +88,10 @@ class Slots:
                         if not rolling:
                             rolling = True
                             roll_start_time = pygame.time.get_ticks()
-					""" if event.type == pygame.KEYDOWN and event.key == pygame.K_ESC:
-						pygame.quit()
-						quit() """
+
+                    if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                        quit()
 
             else:
                 game_over_text = self.font.render("GAME OVER", True, self.red)

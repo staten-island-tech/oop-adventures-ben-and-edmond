@@ -68,3 +68,5 @@ how to add user input in pygame <-- this didn't really help much although I did 
 12/17
 why is money not defined (did not help)
 how to add animation (learned the use of pygame.time.get_ticks)
+12/19 
+i had an indentation error i asked chatgpt to help, it looks the exact same, i just rewrote the code and it worked.
