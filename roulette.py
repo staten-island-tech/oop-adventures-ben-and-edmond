@@ -33,22 +33,31 @@ class roulette:
             return "third_twelve"
 
     def main():
-        print("Welcome to addiction.")
+        print("Welcome to addiction (roulette).")
         while True:
             result = roulette.diceroll()
+            if roulette.money == 0:
+                print("You are bankrupt.")
+                break
+            print(f"Balance: $",roulette.money)
+            exit_input = input("Would you like to continue? (y/n)\n").lower()
+            if exit_input == "y":
+                print("Continuing.")
+            if exit_input == "n":
+                print("Exiting.")
+                break
             while True:
-                try:
-                    print(f"You have $",roulette.money)
-                    bet_amount_input = int(input("How much $ would you like to bet?\n"))
+                    try:
+                        bet_amount_input = int(input("How much $ would you like to bet?\n"))
                     
-                    if bet_amount_input <= roulette.money:
-                        break
-                    elif bet_amount_input > roulette.money:
-                        print("You do not have enough $")
-                    else:
-                        print("Invalid Bet.")
-                except:
-                    print("Invalid input. Please enter a valid number.")
+                        if bet_amount_input <= roulette.money:
+                           break
+                        elif bet_amount_input > roulette.money:
+                            print("You do not have enough $")
+                        else:
+                            print("Invalid Bet.")
+                    except:
+                        print("Invalid input. Please enter a valid number.")
 
             bet_type_input = input("What type of bet would you like to place? (number, color, twelves)\n").lower()
             if bet_type_input == "number":
@@ -58,11 +67,12 @@ class roulette:
                         print("Invalid Number.")
                     elif num_input == result:
                         roulette.money = roulette.money+bet_amount_input*9
+                        print(f"The wheel rolled",result)
                         print(f"You won $",bet_amount_input*9)
-                        print(roulette.money)
                         break
                     else:
                         roulette.money = roulette.money-bet_amount_input
+                        print(f"The wheel rolled",result)
                         print(f"You lost $",bet_amount_input)
                         break
             elif bet_type_input == "color":
@@ -71,24 +81,34 @@ class roulette:
                     if color_input not in ["red","black","green"]:
                         print("Invalid Color.")
                     elif roulette.check_color(result) == color_input:
-                        roulette.money = roulette.money+bet_amount_input
-                        print(f"You won $",bet_amount_input)
-                        break
+                        if color_input == "green":
+                            roulette.money = roulette.money+bet_amount_input*5
+                            print(f"The wheel rolled",result)
+                            print(f"You won $",bet_amount_input)
+                            break
+                        else:
+                            roulette.money = roulette.money+bet_amount_input
+                            print(f"The wheel rolled",result)
+                            print(f"You won $",bet_amount_input)
+                            break
                     else:
                         roulette.money = roulette.money-bet_amount_input
+                        print(f"The wheel rolled",result)
                         print(f"You lost $",bet_amount_input)
                         break
             elif bet_type_input == "twelves":
                 while True:
-                    twelve_input = input("Which twelve would you like to bet on (first, second, third)")
+                    twelve_input = input("Which twelve would you like to bet on (first, second, third)\n")
                     if twelve_input not in ["first","second","third"]:
                         print("Invalid Twelve.")
                     if roulette.check_twelve(result) == twelve_input:
                         roulette.money = roulette.money+bet_amount_input*2
+                        print(f"The wheel rolled",result)
                         print(f"You won $",bet_amount_input*2)
                         break
                     else:
                         roulette.money = roulette.money-bet_amount_input
+                        print(f"The wheel rolled",result)
                         print(f"You lost $",bet_amount_input)
                         break
             else:
