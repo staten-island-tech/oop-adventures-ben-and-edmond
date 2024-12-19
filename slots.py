@@ -107,4 +107,4 @@ class Slots:
             pygame.display.update()
 
 
-#Slots().game_loop()
+Slots().game_loop()
