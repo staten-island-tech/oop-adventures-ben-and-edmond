@@ -32,6 +32,12 @@ class roulette:
         if num in roulette.third_twelve:
             return "third_twelve"
 
+    def clear():
+        if os.name == 'nt':
+            os.system('CLS')
+        if os.name == 'posix':
+            os.system('clear')    
+
     def main():
         print("Welcome to addiction (roulette).")
         while True:
