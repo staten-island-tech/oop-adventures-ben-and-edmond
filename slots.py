@@ -1,40 +1,50 @@
-import os
+# slots.py
 import pygame
 import random
+from map import money 
+
 class Slots:
-    pygame.init()
+    def __init__(self):
+        self.money = money
+        pygame.init()
+        self.black = (0, 0, 0)
+        self.green = (0, 255, 0)
+        self.blue = (0, 0, 255)
+        self.orange = (255, 165, 0)
+        self.white = (255, 255, 255)
+        self.red = (255, 0, 0)
+        self.screen = pygame.display.set_mode([600, 600])
+        pygame.display.set_caption('Slot Machine')
+        self.font = pygame.font.Font('freesansbold.ttf', 32)
 
-    black = (0, 0, 0)
-    green = (0, 255, 0)
-    blue = (0, 0, 255)
-    orange = (255, 165, 0)
-    white = (255, 255, 255)
-    red = (255, 0, 0)
-    screen = pygame.display.set_mode([600, 600])
-    font = pygame.font.Font('freesansbold.ttf', 32)
+        self.fruits = ["0", "1", "2", "3", "4"]
+        self.color = [self.black, self.green, self.red, self.blue, self.orange]
 
-    fruits = ["0", "1", "2", "3", "4"]
-    color = [black, green, red, blue, orange]
-    
-    money = 100
-    bet = 10
+    def prompt_bet(self):
+        while True:
+            try:
+                bet_amount = int(input(f"Current balance: ${self.money}. Enter your bet amount: $"))
+                if bet_amount > 0 and bet_amount <= self.money:
+                    self.bet = bet_amount
+                    break
+                else:
+                    print("Invalid bet amount. Please enter a valid bet.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
 
     def starting(self):
-        text = self.font.render('SPACE TO ROLL', True, self.green)
+        text = self.font.render('PRESS SPACE TO ROLL', True, self.green)
         slot1 = self.font.render('', True, self.black)
         slot2 = self.font.render('', True, self.black)
         slot3 = self.font.render('', True, self.black)
         cashText = self.font.render(f"Money: ${self.money}", True, self.black)
-        textRect = text.get_rect()
-        slot1Rect = slot1.get_rect()
-        slot2Rect = slot2.get_rect()
-        slot3Rect = slot3.get_rect()
-        cashTextRect = cashText.get_rect()
-        textRect.center = (300, 500)
-        slot1Rect.center = (100, 300)
-        slot2Rect.center = (300, 300)
-        slot3Rect.center = (500, 300)
-        cashTextRect.center = (100, 100)
+
+        textRect = text.get_rect(center=(300, 500))
+        slot1Rect = slot1.get_rect(center=(100, 300))
+        slot2Rect = slot2.get_rect(center=(300, 300))
+        slot3Rect = slot3.get_rect(center=(500, 300))
+        cashTextRect = cashText.get_rect(center=(100, 100))
+
         return text, slot1, slot2, slot3, cashText, slot1Rect, slot2Rect, slot3Rect, textRect, cashTextRect
 
     def roll(self):
@@ -55,21 +65,36 @@ class Slots:
             return -self.bet
 
     def game_loop(self):
-        
+        self.prompt_bet()
         rolling = False
         roll_start_time = 0
-        total_roll_time = 200
-        roll_count = 0
+        total_roll_time = 200  
 
         text, slot1, slot2, slot3, cashText, slot1Rect, slot2Rect, slot3Rect, textRect, cashTextRect = self.starting()
 
         while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE and not rolling:
+                        rolling = True
+                        roll_start_time = pygame.time.get_ticks()
+                    if event.key == pygame.K_ESCAPE:
+                        print(f"You have is ${self.money}.")
+                        pygame.quit()
+                        quit()
+
             if self.money >= self.bet:
                 self.screen.fill(self.white)
+
                 self.screen.blit(text, textRect)
                 self.screen.blit(slot1, slot1Rect)
                 self.screen.blit(slot2, slot2Rect)
                 self.screen.blit(slot3, slot3Rect)
+
                 cashText = self.font.render(f"Money: ${self.money}", True, self.black)
                 self.screen.blit(cashText, cashTextRect)
 
@@ -81,30 +106,20 @@ class Slots:
                         profit = self.calculate_money(x, y, z)
                         self.money += profit
 
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        pygame.quit()
-                        quit()
-                    if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                        if not rolling:
-                            rolling = True
-                            roll_start_time = pygame.time.get_ticks()
-                    if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                        pygame.quit()
-                        quit()
+                pygame.display.update() 
 
             else:
                 game_over_text = self.font.render("GAME OVER", True, self.red)
-                game_over_rect = game_over_text.get_rect()
-                game_over_rect.center = (300, 300)
+                game_over_rect = game_over_text.get_rect(center=(300, 300))
                 self.screen.fill(self.white)
                 self.screen.blit(game_over_text, game_over_rect)
                 pygame.display.update()
-                pygame.time.wait(3000)
+
+                pygame.time.wait(2000)
                 pygame.quit()
                 quit()
 
-            pygame.display.update()
 
 
-Slots().game_loop()
+game = Slots()  
+game.game_loop()
