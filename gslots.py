@@ -1,10 +1,9 @@
 # slots.py
 import pygame
 import random
-from map import money 
-
+from map import money
 class Slots:
-    def __init__(self):
+    def __init__(self,money):
         self.money = money
         pygame.init()
         self.black = (0, 0, 0)
@@ -121,5 +120,5 @@ class Slots:
 
 
 
-game = Slots()  
+game = Slots(money)  
 game.game_loop()

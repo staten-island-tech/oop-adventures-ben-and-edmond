@@ -1,5 +1,4 @@
 import os
-import random
 import importlib
 money = 1000
 class Game:
@@ -13,6 +12,7 @@ class Game:
                                        [4, 5], [4, 6], [4, 7], [4, 8], [4, 9], [4, 10],
                                        [7, 5], [7, 6], [7, 7], [7, 8], [7, 9], [7, 10]]
         self.blackjack_locations = [[2, 15], [3, 15], [4, 15], [2, 13], [3, 13], [4, 13]]
+        self.roulette_locations = [[1,2]]
         self.map = self.create_map()
 
     def create_map(self):
@@ -33,6 +33,9 @@ class Game:
         for bj_pos in self.blackjack_locations:
             bx, by = bj_pos
             self.map[bx][by] = " 🃏"
+        for roul_pos in self.roulette_locations:
+            rx, ry = roul_pos
+            self.map[rx][ry] = " 🎡"
 
         for row in self.map:
             print("".join(row))
@@ -54,14 +57,18 @@ class Game:
     def check_position(self):
         if self.player_pos in self.slot_machine_locations:
             print("Starting Slots!\n")
-            # Import and create a Slots instance, passing money
-            slots = importlib.import_module('slots')
-            slots.Slots(self.money).game_loop()  # Pass the money to the Slots class
+            slots = importlib.import_module('gslots')
+            slots.Slots().game_loop()  
         elif self.player_pos in self.blackjack_locations:
             print("Starting Blackjack!\n")
-            blackjack_module = importlib.import_module('blackjack')
-            blackjack_game = blackjack_module.Blackjack(self.money)  # Pass money to Blackjack class
+            blackjack_module = importlib.import_module('gblackjack')
+            blackjack_game = blackjack_module.Blackjack()  
             blackjack_game.bj()
+        elif self.player_pos in self.roulette_locations:
+            print("Starting Roulette!\n")
+            roulette_module = importlib.import_module('groulette')
+            roulette_game = roulette_module.roulette()
+            roulette_game.main()
 
     def play(self):
         while True:
@@ -74,7 +81,6 @@ class Game:
                 self.move_player(move)
                 self.check_position()
 
-# Entry point of the program
 if __name__ == "__main__":
     game = Game(12, 18, 1000)
     game.play()
