@@ -59,19 +59,16 @@ class Game:
             print("Starting Slots!\n")
             slots = importlib.import_module('gslots')
             slots.Slots().game_loop()
-            Game.display_map()
         elif self.player_pos in self.blackjack_locations:
             print("Starting Blackjack!\n")
             blackjack_module = importlib.import_module('gblackjack')
             blackjack_game = blackjack_module.Blackjack()  
             blackjack_game.bj()
-            self.display_map()
         elif self.player_pos in self.roulette_locations:
             print("Starting Roulette!\n")
             roulette_module = importlib.import_module('groulette')
             roulette_game = roulette_module.roulette()
             roulette_game.main()
-            self.display_map()
 
     def play(self):
         while True:
