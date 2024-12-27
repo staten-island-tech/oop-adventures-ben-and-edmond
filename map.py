@@ -3,7 +3,7 @@ import random
 import importlib
 money = 1000
 class Game:
-    def __init__(self, rows, cols):
+    def __init__(self, rows, cols, money):
         self.rows = rows
         self.cols = cols
         self.player_pos = [0, 0]
@@ -56,11 +56,11 @@ class Game:
             print("Starting Slots!\n")
             # Import and create a Slots instance, passing money
             slots = importlib.import_module('slots')
-            slots.Slots().game_loop()  # Pass the money to the Slots class
+            slots.Slots(self.money).game_loop()  # Pass the money to the Slots class
         elif self.player_pos in self.blackjack_locations:
             print("Starting Blackjack!\n")
             blackjack_module = importlib.import_module('blackjack')
-            blackjack_game = blackjack_module.Blackjack()  # Pass money to Blackjack class
+            blackjack_game = blackjack_module.Blackjack(self.money)  # Pass money to Blackjack class
             blackjack_game.bj()
 
     def play(self):
@@ -76,5 +76,5 @@ class Game:
 
 # Entry point of the program
 if __name__ == "__main__":
-    game = Game(12, 18)
+    game = Game(12, 18, 1000)
     game.play()

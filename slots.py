@@ -28,9 +28,9 @@ class Slots:
                     self.bet = bet_amount
                     break
                 else:
-                    print("Invalid bet amount. Please enter a valid bet.")
+                    print("Invalid bet amount")
             except ValueError:
-                print("Invalid input. Please enter a number.")
+                print("Invalid input")
 
     def starting(self):
         text = self.font.render('PRESS SPACE TO ROLL', True, self.green)
@@ -43,7 +43,7 @@ class Slots:
         slot1Rect = slot1.get_rect(center=(100, 300))
         slot2Rect = slot2.get_rect(center=(300, 300))
         slot3Rect = slot3.get_rect(center=(500, 300))
-        cashTextRect = cashText.get_rect(center=(100, 100))
+        cashTextRect = cashText.get_rect(center=(120, 100))
 
         return text, slot1, slot2, slot3, cashText, slot1Rect, slot2Rect, slot3Rect, textRect, cashTextRect
 
@@ -68,7 +68,7 @@ class Slots:
         self.prompt_bet()
         rolling = False
         roll_start_time = 0
-        total_roll_time = 200  
+        total_roll_time = 300  
 
         text, slot1, slot2, slot3, cashText, slot1Rect, slot2Rect, slot3Rect, textRect, cashTextRect = self.starting()
 
@@ -115,7 +115,7 @@ class Slots:
                 self.screen.blit(game_over_text, game_over_rect)
                 pygame.display.update()
 
-                pygame.time.wait(2000)
+                pygame.time.wait(1000)
                 pygame.quit()
                 quit()
 
