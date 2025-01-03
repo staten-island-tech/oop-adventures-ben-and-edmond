@@ -131,7 +131,7 @@ class Blackjack:
         player_hand = self.deal(self.deck)
         
         while True:
-            print("The dealer is showing a " + str(dealer_hand[0]))
+            print("\nThe dealer is showing a " + str(dealer_hand[0]))
             print("You have a " + str(player_hand) + " for a total of " + str(self.total(player_hand)))
             self.blackjack(dealer_hand, player_hand)
             
@@ -139,15 +139,15 @@ class Blackjack:
   
             while choice == "h":
                 self.hit(player_hand, self.deck)
-                print("You have a " + str(player_hand) + " for a total of " + str(self.total(player_hand)))
+                print("\nYou have a " + str(player_hand) + " for a total of " + str(self.total(player_hand)))
                 
                 if self.total(player_hand) > 21:
-                    print("You busted!")
+                    print("\nYou busted!\n")
                     self.print_results(dealer_hand, player_hand)
                     self.money -= bet  
                     print(f"Your balance is now ${self.money}.")
                     if self.money <= 0:
-                        print("You have no money left. Exiting the game.")
+                        print("\nYou have no money left. Exiting the game.")
                         exit()  
                     self.play_again()
                     return  
@@ -155,10 +155,10 @@ class Blackjack:
                 choice = input("Do you want to [H]it, [S]tand, or [Q]uit: ").lower()
       
             if choice == "s":
-                print("You chose to stand.")
+                print("\nYou chose to stand.")
                 print("The dealer's hand is: " + str(dealer_hand) + " for a total of " + str(self.total(dealer_hand)))
                 while self.total(dealer_hand) < 17:
-                    print("The dealer is hitting...")
+                    print("\nThe dealer is hitting...")
                     self.hit(dealer_hand, self.deck)
                     print("Dealer now has: " + str(dealer_hand) + " for a total of " + str(self.total(dealer_hand)))
                 
@@ -184,7 +184,6 @@ class Blackjack:
 
     def game(self):
         self.bj()
-
 
 game = Blackjack()
 game.game()
