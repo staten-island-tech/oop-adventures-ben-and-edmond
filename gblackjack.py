@@ -100,7 +100,7 @@ class Blackjack:
             self.money -= bet  
         elif self.total(player_hand) > self.total(dealer_hand):
             self.print_results(dealer_hand, player_hand)
-            print("Congratulations. Your score is higher than the dealer. You win\n")
+            print("\nCongratulations. Your score is higher than the dealer. You win\n")
             self.money += bet  
 
         print(f"Your balance is now ${self.money}.")
