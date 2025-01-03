@@ -51,7 +51,7 @@ class roulette:
                 print("Continuing.")
             if exit_input == "n":
                 print("Exiting.")
-                break
+                break   
             while True:
                     try:
                         bet_amount_input = int(input("How much $ would you like to bet?\n"))

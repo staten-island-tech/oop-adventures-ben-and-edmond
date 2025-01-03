@@ -1,11 +1,15 @@
 import os 
 import random
 from map import money
+
+import random
+import os
+
 class Blackjack:
-    deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] * 4  
+    deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] * 4
     
     def __init__(self):
-        self.money=money
+        self.money = money
         print(f"Your starting balance is ${self.money}.\n")
         
     def deal(self, deck):
@@ -24,13 +28,9 @@ class Blackjack:
             hand.append(card)
         return hand
 
-    def play_again(self):
-        again = input("Do you want to play again? (Y/N): ").lower()
-        if again == "y":
-            self.game()
-        else:
-            print("Bye!")
-            exit()
+    def print_results(self, dealer_hand, player_hand):  
+        print("The dealer has a " + str(dealer_hand) + " for a total of " + str(self.total(dealer_hand)))
+        print("You have a " + str(player_hand) + " for a total of " + str(self.total(player_hand)))
 
     def total(self, hand):
         total = 0
@@ -62,10 +62,6 @@ class Blackjack:
             card = "A"
         hand.append(card)
         return hand
-
-    def print_results(self, dealer_hand, player_hand):  
-        print("The dealer has a " + str(dealer_hand) + " for a total of " + str(self.total(dealer_hand)))
-        print("You have a " + str(player_hand) + " for a total of " + str(self.total(player_hand)))
 
     def blackjack(self, dealer_hand, player_hand):
         if self.total(player_hand) == 21:
@@ -114,6 +110,10 @@ class Blackjack:
         print("WELCOME TO BLACKJACK!\n")
         print(f"Your current balance is ${self.money}.")
         
+        if self.money <= 0:
+            print("You don't have enough money to play. Exiting the game.")
+            exit()
+
         while True:
             try:
                 global bet
@@ -137,7 +137,6 @@ class Blackjack:
             
             choice = input("Do you want to [H]it, [S]tand, or [Q]uit: ").lower()
   
-            
             while choice == "h":
                 self.hit(player_hand, self.deck)
                 print("You have a " + str(player_hand) + " for a total of " + str(self.total(player_hand)))
@@ -147,24 +146,45 @@ class Blackjack:
                     self.print_results(dealer_hand, player_hand)
                     self.money -= bet  
                     print(f"Your balance is now ${self.money}.")
+                    if self.money <= 0:
+                        print("You have no money left. Exiting the game.")
+                        exit()  
                     self.play_again()
                     return  
                 
                 choice = input("Do you want to [H]it, [S]tand, or [Q]uit: ").lower()
       
-            
             if choice == "s":
+                print("You chose to stand.")
+                print("The dealer's hand is: " + str(dealer_hand) + " for a total of " + str(self.total(dealer_hand)))
                 while self.total(dealer_hand) < 17:
+                    print("The dealer is hitting...")
                     self.hit(dealer_hand, self.deck)
+                    print("Dealer now has: " + str(dealer_hand) + " for a total of " + str(self.total(dealer_hand)))
+                
                 self.score(dealer_hand, player_hand)
-            
+                break
+
             elif choice == "q":
                 print(f"Your balance is now ${self.money}.")
+                print("Returning to map.")
+                return  
+
+    def play_again(self):
+        if self.money <= 0:
+            print("You don't have enough money to play again. Exiting the game.")
+            exit()
+        else:
+            again = input("Do you want to play again? (Y/N): ").lower()
+            if again == "y":
+                self.game()
+            else:
                 print("Bye!")
                 exit()
 
     def game(self):
         self.bj()
+
 
 game = Blackjack()
 game.game()
