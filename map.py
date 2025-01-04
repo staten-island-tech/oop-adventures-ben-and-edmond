@@ -1,13 +1,15 @@
 import os
-import importlib
-money = 1000
+import gslots
+import groulette
+import gblackjack
+
 class Game:
     def __init__(self, rows, cols, money):
         self.rows = rows
         self.cols = cols
         self.player_pos = [0, 0]
         self.money = money
-        self.slot_machine_locations = [[0,2], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10],
+        self.slot_machine_locations = [[0, 2], [2, 5], [2, 6], [2, 7], [2, 8], [2, 9], [2, 10],
                                        [9, 5], [9, 6], [9, 7], [9, 8], [9, 9], [9, 10],
                                        [4, 5], [4, 6], [4, 7], [4, 8], [4, 9], [4, 10],
                                        [7, 5], [7, 6], [7, 7], [7, 8], [7, 9], [7, 10]]
@@ -55,20 +57,20 @@ class Game:
             self.player_pos[1] += 1
 
     def check_position(self):
+        game = None
         if self.player_pos in self.slot_machine_locations:
             print("Starting Slots!\n")
-            slots = importlib.import_module('gslots')
-            slots.Slots().game_loop()
+            game = gslots.Slots(self.money)
         elif self.player_pos in self.blackjack_locations:
             print("Starting Blackjack!\n")
-            blackjack_module = importlib.import_module('gblackjack')
-            blackjack_game = blackjack_module.Blackjack()  
-            blackjack_game.bj()
+            game = gblackjack.Blackjack(self.money)
         elif self.player_pos in self.roulette_locations:
             print("Starting Roulette!\n")
-            roulette_module = importlib.import_module('groulette')
-            roulette_game = roulette_module.roulette()
-            roulette_game.main()
+            game = groulette.roulette(self.money)
+
+        if game:
+            game.start()
+            self.money = game.get_money()
 
     def play(self):
         while True:
@@ -76,11 +78,7 @@ class Game:
             move = input("Move with WASD (or Q to quit): ").lower()
 
             if move == "q":
-                break
+                return
             elif move in ["w", "a", "s", "d"]:
                 self.move_player(move)
                 self.check_position()
-
-if __name__ == "__main__":
-    game = Game(12, 18, 1000)
-    game.play()

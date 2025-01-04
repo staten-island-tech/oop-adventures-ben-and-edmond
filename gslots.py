@@ -1,9 +1,8 @@
 # slots.py
 import pygame
 import random
-from map import money
 class Slots:
-    def __init__(self,money):
+    def __init__(self, money):
         self.money = money
         pygame.init()
         self.black = (0, 0, 0)
@@ -19,6 +18,9 @@ class Slots:
         self.fruits = ["0", "1", "2", "3", "4"]
         self.color = [self.black, self.green, self.red, self.blue, self.orange]
 
+    def get_money(self):
+        return self.money
+    
     def prompt_bet(self):
         while True:
             try:
@@ -37,14 +39,16 @@ class Slots:
         slot2 = self.font.render('', True, self.black)
         slot3 = self.font.render('', True, self.black)
         cashText = self.font.render(f"Money: ${self.money}", True, self.black)
+        betText = self.font.render(f"Bet: ${self.bet}", True, self.black)
 
         textRect = text.get_rect(center=(300, 500))
         slot1Rect = slot1.get_rect(center=(100, 300))
         slot2Rect = slot2.get_rect(center=(300, 300))
         slot3Rect = slot3.get_rect(center=(500, 300))
         cashTextRect = cashText.get_rect(center=(120, 100))
+        betTextRect = betText.get_rect(center=(500, 100))
 
-        return text, slot1, slot2, slot3, cashText, slot1Rect, slot2Rect, slot3Rect, textRect, cashTextRect
+        return text, slot1, slot2, slot3, cashText, slot1Rect, slot2Rect, slot3Rect, textRect, cashTextRect, betText, betTextRect
 
     def roll(self):
         x = random.randint(0, 4)
@@ -63,19 +67,20 @@ class Slots:
         else:
             return -self.bet
 
-    def game_loop(self):
+    def start(self):
         self.prompt_bet()
         rolling = False
         roll_start_time = 0
         total_roll_time = 300  
 
-        text, slot1, slot2, slot3, cashText, slot1Rect, slot2Rect, slot3Rect, textRect, cashTextRect = self.starting()
+        text, slot1, slot2, slot3, cashText, slot1Rect, slot2Rect, slot3Rect, textRect, cashTextRect, betText, betTextRect = self.starting()
 
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    quit()
+                    print("qutting game 1")
+                    return
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE and not rolling:
@@ -84,7 +89,8 @@ class Slots:
                     if event.key == pygame.K_ESCAPE:
                         print(f"You have is ${self.money}.")
                         pygame.quit()
-                        quit()
+                        print("quitting game 2 (esc)")
+                        return
 
             if self.money >= self.bet:
                 self.screen.fill(self.white)
@@ -95,8 +101,11 @@ class Slots:
                 self.screen.blit(slot3, slot3Rect)
 
                 cashText = self.font.render(f"Money: ${self.money}", True, self.black)
+                betText = self.font.render(f"Bet: ${self.bet}", True, self.black)
+                
                 self.screen.blit(cashText, cashTextRect)
-
+                self.screen.blit(betText, betTextRect)
+                
                 if rolling:
                     if pygame.time.get_ticks() - roll_start_time < total_roll_time:
                         slot1, slot2, slot3, x, y, z = self.roll()
@@ -113,12 +122,10 @@ class Slots:
                 self.screen.fill(self.white)
                 self.screen.blit(game_over_text, game_over_rect)
                 pygame.display.update()
-
                 pygame.time.wait(1000)
                 pygame.quit()
+
                 quit()
 
-
-
-game = Slots(money)  
-game.game_loop()
+# game = Slots(money)  
+# game.game_loop()
