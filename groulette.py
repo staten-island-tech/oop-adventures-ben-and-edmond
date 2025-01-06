@@ -1,20 +1,19 @@
 import random
 import os
-from map import money
 class roulette:
-
-
     red_num = [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35]
     black_num = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36]
     green_num = [37,38]
     first_twelve = [1,2,3,4,5,6,7,8,9,10,11,12]
     second_twelve = [13,14,15,16,17,18,19,20,21,22,23,24]
     third_twelve = [25,26,27,28,29,30,31,32,33,34,35,36]
-    def __init__(self):
+    def __init__(self, money):
         self.money=money
         print(f"Your starting balance is ${self.money}.\n")
 
-
+    def get_money(self):
+        return self.money
+    
     def diceroll():
         roll=list(range(1,39))
         result=random.choice(roll)
@@ -43,7 +42,7 @@ class roulette:
         if os.name == 'nt':
             os.system('CLS')  
 
-    def main(self):
+    def start(self):
         print("Welcome to addiction (roulette).")
         while True:
             result = roulette.diceroll()
@@ -158,9 +157,3 @@ class roulette:
                 print(f"Balance: $",self.money)
                 print ("Invalid bet.")
                 return
-
-
-           
-if __name__ == "__main__":
-    game = roulette()
-    game.main()
