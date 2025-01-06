@@ -109,59 +109,13 @@ class Blackjack:
             self.money -= bet  
         elif self.total(player_hand) > self.total(dealer_hand):
             self.print_results(dealer_hand, player_hand)
-            print("\nCongratulations. Your score is higher than the dealer. You win\n")
+            print("Congratulations. Your score is higher than the dealer. You win\n")
             self.money += bet  
 
         print(f"Your balance is now ${self.money}.")
 
     def start(self):
         while True:
-            try:
-                global bet
-                bet = int(input(f"Enter your bet (Current balance: ${self.money}): "))
-                if bet > self.money:
-                    print("You can't bet more than your current balance!")
-                elif bet <= 0:
-                    print("Bet must be greater than 0!")
-                else:
-                    break
-            except ValueError:
-                print("Invalid input. Please enter a number.")
-        
-        dealer_hand = self.deal(self.deck)
-        player_hand = self.deal(self.deck)
-        
-        while True:
-            print("\nThe dealer is showing a " + str(dealer_hand[0]))
-            print("You have a " + str(player_hand) + " for a total of " + str(self.total(player_hand)))
-            self.blackjack(dealer_hand, player_hand)
-            
-            choice = input("Do you want to [H]it, [S]tand, or [Q]uit: ").lower()
-  
-            while choice == "h":
-                self.hit(player_hand, self.deck)
-                print("\nYou have a " + str(player_hand) + " for a total of " + str(self.total(player_hand)))
-                
-                if self.total(player_hand) > 21:
-                    print("\nYou busted!\n")
-                    self.print_results(dealer_hand, player_hand)
-                    self.money -= bet  
-                    print(f"Your balance is now ${self.money}.")
-                    if self.money <= 0:
-                        print("\nYou have no money left. Exiting the game.")
-                        exit()  
-                    self.play_again()
-                    return  
-                
-                choice = input("Do you want to [H]it, [S]tand, or [Q]uit: ").lower()
-      
-            if choice == "s":
-                print("\nYou chose to stand.")
-                print("The dealer's hand is: " + str(dealer_hand) + " for a total of " + str(self.total(dealer_hand)))
-                while self.total(dealer_hand) < 17:
-                    print("\nThe dealer is hitting...")
-                    self.hit(dealer_hand, self.deck)
-                    print("Dealer now has: " + str(dealer_hand) + " for a total of " + str(self.total(dealer_hand)))
             Blackjack.clear()  
             print("WELCOME TO BLACKJACK!\n")
             print(f"Your current balance is ${self.money}.")
@@ -194,7 +148,6 @@ class Blackjack:
                     break
                 
                 choice = input("Do you want to [H]it, [S]tand, or [Q]uit: ").lower()
-
                 
                 if choice == "h": 
                     self.hit(player_hand, self.deck)
@@ -219,26 +172,3 @@ class Blackjack:
             
             if not self.play_again():
                 break
-
-            elif choice == "q":
-                print(f"Your balance is now ${self.money}.")
-                print("Returning to map.")
-                return  
-
-    def play_again(self):
-        if self.money <= 0:
-            print("You don't have enough money to play again. Exiting the game.")
-            exit()
-        else:
-            again = input("Do you want to play again? (Y/N): ").lower()
-            if again == "y":
-                self.game()
-            else:
-                print("Bye!")
-                exit()
-
-    def game(self):
-        self.bj()
-
-game = Blackjack()
-game.game()
