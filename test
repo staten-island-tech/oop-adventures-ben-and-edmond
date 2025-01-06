@@ -1,0 +1,29 @@
+import os
+
+def clear_screen():
+    """Clears the terminal screen."""
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def create_and_display_track(horses, positions, track_length):
+    """
+    Creates and displays a race track with horse positions.
+
+    Args:
+        horses (list): List of horse names or icons.
+        positions (list): List of current positions for each horse.
+        track_length (int): Total length of the race track.
+    """
+    clear_screen()
+    for i, horse in enumerate(horses):
+        # Create the track for this horse
+        track = "-" * positions[i] + horse + "-" * (track_length - positions[i] - 1)
+        print(track)
+    print("\n" + "=" * track_length)  # Finish line
+
+# Example usage:
+if __name__ == "__main__":
+    horses = ["🐎", "🐴", "🏇"]
+    positions = [50, 50, 50]  # Example positions
+    track_length = 50  # Example track length
+
+    create_and_display_track(horses, positions, track_length)
