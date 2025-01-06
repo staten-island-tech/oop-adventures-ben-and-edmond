@@ -113,7 +113,7 @@ class roulette:
                             print(f"Balance: $",self.money)
                             self.money = self.money+bet_amount_input*5
                             print(f"The wheel rolled",result)
-                            print(f"You won $",bet_amount_input)
+                            print(f"You won $",bet_amount_input*5)
                             break
                         else:
                             roulette.clear()
