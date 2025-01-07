@@ -12,7 +12,11 @@ class horse:
         self.money=money
         self.cols = cols
         self.rows = rows
-        self.horse1_pos
+        self.horse1_pos =
+        self.horse2_pos =
+        self.horse3_pos =
+        self.horse4_pos =
+        self.horse5_pos =
         print(f"Your starting balance is ${self.money}.\n")
     
     def clear():
@@ -20,7 +24,23 @@ class horse:
             os.system('CLS')
 
     def create_track(self):
-        
+        track_layout = []
+        for i in range(self.rows):
+            row = ["-"] * self.cols
+            track_layout.append(row)
+        return track_layout
+    
+    def move_player(self, direction):
+        x, y = self.player_pos
+
+        if direction == "w" and x > 0:
+            self.player_pos[0] -= 1
+        elif direction == "a" and y > 0:
+            self.player_pos[1] -= 1
+        elif direction == "s" and x < self.rows - 1:
+            self.player_pos[0] += 1
+        elif direction == "d" and y < self.cols - 1:
+            self.player_pos[1] += 1
 
 
     # def create_map(self):
