@@ -8,8 +8,11 @@ class horse:
         result = random.randint(1,4)
         return result
 
-    def __init__(self):
+    def __init__(self, rows, cols, money):
         self.money=money
+        self.cols = cols
+        self.rows = rows
+        self.horse1_pos
         print(f"Your starting balance is ${self.money}.\n")
     
     def clear():
