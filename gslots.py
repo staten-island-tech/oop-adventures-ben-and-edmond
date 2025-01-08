@@ -61,9 +61,9 @@ class Slots:
 
     def calculate_money(self, x, y, z):
         if x == y == z:
-            return self.bet * 2
+            return self.bet*2
         elif x == y or y == z or x == z:
-            return self.bet * 0.5
+            return -self.bet * 0.5
         else:
             return -self.bet
 
