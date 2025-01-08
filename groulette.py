@@ -50,12 +50,15 @@ class roulette:
                 print("You are bankrupt.")
                 break
             print(f"Balance: $",self.money)
-            exit_input = input("Would you like to continue? (y/n)\n").lower()
-            if exit_input == "y":
-                print("Continuing.")
-            if exit_input == "n":
-                print("Exiting.")
-                break   
+            try:
+                exit_input = input("Would you like to continue? (y)\n").lower()
+                if exit_input == "y":
+                    print("Continuing.")
+                else:
+                    print("Exiting.")
+                    break
+            except ValueError:
+                print("Invalid")
             while True:
                     try:
                         roulette.clear()
