@@ -58,15 +58,16 @@ class Game:
 
     def check_position(self):
         game = None
-        if self.player_pos in self.slot_machine_locations:
-            print("Starting Slots!\n")
-            game = gslots.Slots(self.money)
-        elif self.player_pos in self.blackjack_locations:
-            print("Starting Blackjack!\n")
-            game = gblackjack.Blackjack(self.money)
-        elif self.player_pos in self.roulette_locations:
-            print("Starting Roulette!\n")
-            game = groulette.roulette(self.money)
+        if self.money > 0:
+            if self.player_pos in self.slot_machine_locations:
+                print("Starting Slots!\n")
+                game = gslots.Slots(self.money)
+            elif self.player_pos in self.blackjack_locations:
+                print("Starting Blackjack!\n")
+                game = gblackjack.Blackjack(self.money)
+            elif self.player_pos in self.roulette_locations:
+                print("Starting Roulette!\n")
+                game = groulette.roulette(self.money)
 
         if game:
             game.start()
