@@ -66,6 +66,14 @@ class Slots:
             return -self.bet * 0.5
         else:
             return -self.bet
+    def game_over(self):
+        game_over_text = self.font.render("GAME OVER", True, self.red)
+        game_over_rect = game_over_text.get_rect(center=(300, 300))
+        self.screen.fill(self.white)
+        self.screen.blit(game_over_text, game_over_rect)
+        pygame.display.update()
+        pygame.time.wait(1000)
+        pygame.quit()
 
     def start(self):
         self.prompt_bet()
@@ -117,14 +125,7 @@ class Slots:
                 pygame.display.update() 
 
             else:
-                game_over_text = self.font.render("GAME OVER", True, self.red)
-                game_over_rect = game_over_text.get_rect(center=(300, 300))
-                self.screen.fill(self.white)
-                self.screen.blit(game_over_text, game_over_rect)
-                pygame.display.update()
-                pygame.time.wait(1000)
-                pygame.quit()
-
+                self.game_over()
                 quit()
 
 # game = Slots(money)  
