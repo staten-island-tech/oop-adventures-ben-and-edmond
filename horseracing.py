@@ -59,7 +59,7 @@ class horse:
     #     if self.horse4_pos[1] == 75
     #     print("")
     #     if self.horse5_pos[1] == 75
-    #     print("")
+    #     print("")sdfsdf
 
     
     def move_horses(self):
@@ -79,7 +79,7 @@ class horse:
         for i in range(375):
                 horse.roll()
                 self.move_horses()
-                self.display_map()
+                self.display_map()asdasd
 
 test = horse(5,75,1000)
 
