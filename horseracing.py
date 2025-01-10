@@ -1,5 +1,6 @@
 import random
 import os 
+import time
 
 class horse:
     @staticmethod
@@ -44,8 +45,16 @@ class horse:
         self.map[x4][y4] = "🟡🐌"
         x5, y5 = self.horse5_pos
         self.map[x5][y5] = "🟠🐌"
+        print("+" + "-" * 31 + "+")
+        welcome_line = "Welcome to Snail Racing!"
+        print("| "+ " " + welcome_line.ljust(29) + "|")
+        money_line = f"You have $ {self.money}"
+        print("| "+ " " + money_line.ljust(29) + "|")
+        print("|" + " " * 29 + " ","|")
         for row in self.map:
-            print("".join(row))
+            print("|" + " " + "".join(row).ljust(28) + "|")
+        print("|" + " " * 29 + " ","|")
+        print("+" + "-" * 31 + "+")
 
         # self.map[x1][y1] = "-"
 
@@ -61,26 +70,83 @@ class horse:
     #     if self.horse5_pos[1] == 75
     #     print("")sdfsdf
 
+
+
+    def bet_inputs(self):
+        while True:
+            try:
+                amount_input = int(input("How much $ would you like to bet?"))
+                if amount_input > self.money:
+                    print("Bet is larger than current balance, Try again.")
+                elif amount_input == 0:
+                    print("Invalid bet Amount")
+                else:
+                    break
+            except:
+                print("Invalid Bet.")
+        while True:
+                cash_input = input(f"Which snail would you like to bet on? ([r]ed, [b]lue, [g]reen, [y]ellow, [o]range)\n").lower()
+                if cash_input not in ["r","b","g","y","o"]:
+                    print("Invalid bet type.")
+                # elif cash_input == "r":
+                    
+                # elif cash_input == "b":
+
+                # elif cash_input == "g":
+
+                # elif cash_input == "y":
+
+                # elif cash_input == "o":
+
+    def check_win(self):
+        if self.horse1_pos[1] == 24:
+            print("The Red Snail has won the race!")
+            time.sleep(999999999)
+            return 
+        if self.horse2_pos[1] == 24:
+            print("The Blue Snail has won the race!")
+            time.sleep(999999999)
+            return
+        if self.horse3_pos[1] == 24:
+            print("The Green Snail has won the race!")
+            time.sleep(999999999)
+            return
+        if self.horse4_pos[1] == 24:
+            print("The Yellow Snail has won the race!")
+            time.sleep(999999999)
+            return
+        if self.horse5_pos[1] == 24:
+            print("The Orange Snail has won the race!")
+            time.sleep(999999999)
+            return
+    
     
     def move_horses(self):
-        if horse.roll() == 1:
+        roll_result = self.roll()
+        if roll_result == 1:
             self.horse1_pos[1] += 1
-        if horse.roll() == 2:
+        elif roll_result == 2:
             self.horse2_pos[1] += 1
-        if horse.roll() == 3:
+        elif roll_result == 3:
             self.horse3_pos[1] += 1
-        if horse.roll() == 4:
+        elif roll_result == 4:
             self.horse4_pos[1] += 1
-        if horse.roll() == 5:
+        elif roll_result == 5:
             self.horse5_pos[1] += 1
+
 
         
     def play(self):
-        for i in range(375):
-                horse.roll()
+        while True:
+            for i in range(125):
+                time.sleep(0.1)
+                self.clear()
+                self.display_map()
+                self.check_win()
+                self.display_map()
                 self.move_horses()
-                self.display_map()asdasd
 
-test = horse(5,75,1000)
+
+test = horse(5,25,1000)
 
 test.play()
