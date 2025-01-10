@@ -38,21 +38,6 @@ class roulette:
         if os.name == 'posix':
             os.system('clear')    
 
-    def continue_input():
-        while True:
-            global result
-            result = roulette.diceroll()
-            if roulette.money == 0:
-                print("You are bankrupt.")
-                break
-            print(f"Balance: $",roulette.money)
-            exit_input = input("Would you like to continue? (y/n)\n").lower()
-            if exit_input == "y":
-                print("Continuing.")
-            if exit_input == "n":
-                print("Exiting.")
-                break
-
     def color():
         while True:
             roulette.clear()
@@ -146,20 +131,32 @@ class roulette:
 
     def main():
         print("Welcome to addiction (roulette)!")
-        roulette.continue_input()
-        roulette.bet_input()
-        bet_type_input = input("What type of bet would you like to place? (number, color, twelves)\n").lower()
-        if bet_type_input == "number":
-            roulette.number()
-        elif bet_type_input == "color":
-            roulette.color()
-        elif bet_type_input == "twelves":
-            roulette.twelves()
-        else:
-            roulette.clear()
-            print(f"Balance $",self.money)
-            print ("Invalid bet.")
-            return
+        while True:
+            global result
+            result = roulette.diceroll()
+            if roulette.money == 0:
+                print("You are bankrupt.")
+                break
+            print(f"Balance: $",roulette.money)
+            exit_input = input("Would you like to continue? (y/n)\n").lower()
+            if exit_input == "y":
+                print("Continuing.")
+            if exit_input == "n":
+                print("Exiting.")
+                break
+            roulette.bet_input()
+            bet_type_input = input("What type of bet would you like to place? (number, color, twelves)\n").lower()
+            if bet_type_input == "number":
+                roulette.number()
+            elif bet_type_input == "color":
+                roulette.color()
+            elif bet_type_input == "twelves":
+                roulette.twelves()
+            else:
+                roulette.clear()
+                print(f"Balance $",self.money)
+                print ("Invalid bet.")
+                return
 
 
             
