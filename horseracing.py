@@ -18,6 +18,11 @@ class horse:
         self.horse3_pos = [2,0]
         self.horse4_pos = [3,0]
         self.horse5_pos = [4,0]
+        self.top_left = "┌"
+        self.top_right = "┐"
+        self.bottom_left = "└"
+        self.bottom_right = "┘"
+        self.horizontal_border = "-" * (self.cols + 5)
         print(f"Your starting balance is ${self.money}.\n")
     
     @staticmethod
@@ -45,81 +50,145 @@ class horse:
         self.map[x4][y4] = "🟡🐌"
         x5, y5 = self.horse5_pos
         self.map[x5][y5] = "🟠🐌"
-        print("+" + "-" * 31 + "+")
+        print(self.top_left + self.horizontal_border + self.top_right)
         welcome_line = "Welcome to Snail Racing!"
-        print("| "+ " " + welcome_line.ljust(29) + "|")
+        print("| " + welcome_line.ljust(self.cols + 4) + "|")
         money_line = f"You have $ {self.money}"
-        print("| "+ " " + money_line.ljust(29) + "|")
-        print("|" + " " * 29 + " ","|")
+        print("| " + money_line.ljust(self.cols + 4) + "|")
+        print("|" + " " * (self.cols + 5) + "|")
+    
         for row in self.map:
-            print("|" + " " + "".join(row).ljust(28) + "|")
-        print("|" + " " * 29 + " ","|")
-        print("+" + "-" * 31 + "+")
+            print("| " + "".join(row).ljust(self.cols) + " |")
+    
+        print("|" + " " * (self.cols + 5) + "|")
+    
+        print(self.bottom_left + self.horizontal_border + self.bottom_right)
 
-        # self.map[x1][y1] = "-"
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    # def check_win()
-    #     if self.horse1_pos[1] == 75
-    #     print("")
-    #     if self.horse2_pos[1] == 75
-    #     print("")
-    #     if self.horse3_pos[1] == 75
-    #     print("")
-    #     if self.horse4_pos[1] == 75
-    #     print("")
-    #     if self.horse5_pos[1] == 75
-    #     print("")sdfsdf
-
-
+    def continue_input(self):
+        global again_input
+        while True:
+            if self.money == 0:
+                print("Unable to continue, You have gone bankrupt.")
+                time.sleep(1.5)
+                return False
+            self.clear()
+            self.display_map()
+            again_input = input("Would you like to continue? (y/n)\n").lower()
+            if again_input == "y" or again_input == "n":
+                break
+            else:
+                print("Invalid input.")
+                time.sleep(.5)
+                
+        if again_input == "y":
+            print("Continuing")
+            time.sleep(.5)
+            return True
+        elif again_input == "n":
+            print("Exiting.")
+            time.sleep(.5)
+            return False
 
     def bet_inputs(self):
         while True:
             try:
-                amount_input = int(input("How much $ would you like to bet?"))
+                self.display_map()
+                print(f"Your current balance is $", self.money,"\n")
+                global amount_input
+                amount_input = int(input("How much $ would you like to bet?\n"))
                 if amount_input > self.money:
                     print("Bet is larger than current balance, Try again.")
-                elif amount_input == 0:
-                    print("Invalid bet Amount")
+                    time.sleep(.75)
+                    self.clear()
+                elif amount_input <= 0:
+                    print("Invalid bet Amount.")
+                    time.sleep(.75)
+                    self.clear()
                 else:
+                    self.clear()
                     break
             except:
                 print("Invalid Bet.")
+                time.sleep(.75)
+            
         while True:
-                cash_input = input(f"Which snail would you like to bet on? ([r]ed, [b]lue, [g]reen, [y]ellow, [o]range)\n").lower()
-                if cash_input not in ["r","b","g","y","o"]:
+                self.display_map()
+                global color_input
+                color_input = input(f"Which snail would you like to bet on? ([r]ed, [b]lue, [g]reen, [y]ellow, [o]range)\n").lower()
+                if color_input not in ["r","b","g","y","o"]:
                     print("Invalid bet type.")
-                # elif cash_input == "r":
-                    
-                # elif cash_input == "b":
+                    time.sleep(1)
+                elif color_input == "r":
+                    print("You have bet on Red.")
+                    time.sleep(1)
+                    break
+                elif color_input == "b":
+                    print("You have bet on Blue.")
+                    time.sleep(1)
+                    break
+                elif color_input == "g":
+                    print("You have bet on Green.")
+                    time.sleep(1)
+                    break
+                elif color_input == "y":
+                    print("You have bet on Yellow.")
+                    time.sleep(1)
+                    break
+                elif color_input == "o":
+                    print("You have bet on Orange.")
+                    time.sleep(1)
+                    break
 
-                # elif cash_input == "g":
+    def payout(self):
 
-                # elif cash_input == "y":
+        if color_input == self.check_win():
+            self.money = self.money + amount_input*2.5
+            print(f"You won $",amount_input*2.5)
+        else:
+            self.money = self.money - amount_input
+            print(f"You lost $",amount_input)
+            
 
-                # elif cash_input == "o":
 
     def check_win(self):
+        
         if self.horse1_pos[1] == 24:
+            self.clear()
+            self.display_map()
             print("The Red Snail has won the race!")
-            time.sleep(999999999)
-            return 
+            return "r"
         if self.horse2_pos[1] == 24:
             print("The Blue Snail has won the race!")
-            time.sleep(999999999)
-            return
+            self.clear()
+            self.display_map()
+            return "b"
         if self.horse3_pos[1] == 24:
+            self.clear()
+            self.display_map()
             print("The Green Snail has won the race!")
-            time.sleep(999999999)
-            return
+            return "g"
         if self.horse4_pos[1] == 24:
+            self.clear()
+            self.display_map()
             print("The Yellow Snail has won the race!")
-            time.sleep(999999999)
-            return
+            return "y"
         if self.horse5_pos[1] == 24:
+            self.clear()
+            self.display_map()
             print("The Orange Snail has won the race!")
-            time.sleep(999999999)
-            return
+            return "o"
+        else:
+            return False
     
+    def reset_positions(self):
+        self.horse1_pos = [0, 0]
+        self.horse2_pos = [1, 0]
+        self.horse3_pos = [2, 0]
+        self.horse4_pos = [3, 0]
+        self.horse5_pos = [4, 0]
+
     
     def move_horses(self):
         roll_result = self.roll()
@@ -133,20 +202,27 @@ class horse:
             self.horse4_pos[1] += 1
         elif roll_result == 5:
             self.horse5_pos[1] += 1
-
-
-        
+            
     def play(self):
-        while True:
-            for i in range(125):
+        
+        while self.continue_input() == True:
+            self.reset_positions()
+            self.clear()
+            self.bet_inputs()
+
+            while self.check_win() == False:
                 time.sleep(0.1)
                 self.clear()
                 self.display_map()
-                self.check_win()
-                self.display_map()
                 self.move_horses()
+                self.check_win()
+                if self.check_win() != False:
+                    time.sleep(1)
+        
+            self.payout()
+            time.sleep(5)
+                              
+ 
 
-
-test = horse(5,25,1000)
-
+test = horse(5,25,100000)
 test.play()
