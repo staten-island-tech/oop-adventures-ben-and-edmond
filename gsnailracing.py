@@ -2,7 +2,7 @@ import random
 import os 
 import time
 
-class horse:
+class snail:
     @staticmethod
     def roll():
         result = random.randint(1,5)
@@ -65,7 +65,8 @@ class horse:
         print(self.bottom_left + self.horizontal_border + self.bottom_right)
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
+    def get_money(self):
+        return self.money
     def continue_input(self):
         global again_input
         while True:
@@ -203,7 +204,7 @@ class horse:
         elif roll_result == 5:
             self.horse5_pos[1] += 1
             
-    def play(self):
+    def start(self):
         
         while self.continue_input() == True:
             self.reset_positions()
@@ -220,9 +221,5 @@ class horse:
                     time.sleep(1)
         
             self.payout()
-            time.sleep(5)
-                              
- 
-
-test = horse(5,25,100000)
-test.play()
+            time.sleep(1)
+            break
