@@ -97,12 +97,12 @@ class Game:
                 self.check_position()
     class Person:
         def __init__(self, fname, lname):
-            self.firstname = fname
-            self.lastname = lname
+            self.firstname = Linda
+            self.lastname = Smith
 
         def printname(self):
             print(self.firstname, self.lastname)
-    class grammy:
+    class grammy(Person):
         def __init__(self, fname, lname):
             super().__init__(fname, lname)
         
