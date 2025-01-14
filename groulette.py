@@ -13,6 +13,8 @@ class roulette:
     def __init__(self, money):
         self.money = money
         print(f"Your starting balance is ${self.money}.\n")
+    def get_money(self):
+        return self.money
 
     @staticmethod
     def diceroll():
