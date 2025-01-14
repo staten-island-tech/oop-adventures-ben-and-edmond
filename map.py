@@ -3,6 +3,16 @@ import gslots
 import groulette
 import gblackjack
 import gsnailracing
+class Person:
+  def __init__(self, fname, lname):
+    self.firstname = fname
+    self.lastname = lname
+class grandma(Person):
+  def __init__(self, fname, lname):
+    super().__init__(fname, lname)
+
+  def scream(self):
+    print(self.firstname, self.lastname,":" "\nGET OUT OF MY MACHINE ")
 
 class Game:
     def __init__(self, rows, cols, money):
@@ -18,7 +28,7 @@ class Game:
         self.roulette_locations = [[2, 1], [3, 1], [4, 1], [2, 3], [3, 3], [4, 3], [7,1] , [8,1] , [9,1] , [7,3] , [8,3] , [9,3]]
         self.snail_locations = [[0,0],[11,0],[11,17],[0,17],[2,4],[2,5],[2,11],[2,12]]
         self.grammy_locations = [[5,6]]
-        self.grammy_machine_location = [[4,6]]
+        self.grammy_machine_locations = [[4,6]]
         self.map = self.create_map()
 
     def create_map(self):
@@ -45,9 +55,13 @@ class Game:
         for snail_pos in self.snail_locations:
             sx, sy = snail_pos
             self.map[sx][sy] = " 🐌"
-        for grammy_pos in self.grammy_locations
+        for grammy_pos in self.grammy_locations:
             gx, gy = grammy_pos
             self.map[gx][gy] = " 👵"
+        for grammy_machine_pos in self.grammy_machine_locations:
+            gmx, gmy = grammy_machine_pos
+            self.map[gmx][gmy] = " 🎰"
+
         for row in self.map:
             print("".join(row))
 
@@ -80,6 +94,13 @@ class Game:
             elif self.player_pos in self.snail_locations:
                 print("Starting Snail Racing\n")
                 game = gsnailracing.snail(5, 25, self.money)
+            elif self.player_pos in self.grammy_locations:
+                grammy_anger = grandma("Linda", "Smith")
+                grammy_anger.scream()
+                
+            elif self.player_pos in self.grammy_machine_locations:
+                print("GET AWAY FROM MY MACHINE")
+
 
         if game:
             game.start()
@@ -95,14 +116,3 @@ class Game:
             elif move in ["w", "a", "s", "d"]:
                 self.move_player(move)
                 self.check_position()
-    class Person:
-        def __init__(self, fname, lname):
-            self.firstname = Linda
-            self.lastname = Smith
-
-        def printname(self):
-            print(self.firstname, self.lastname)
-    class grammy(Person):
-        def __init__(self, fname, lname):
-            super().__init__(fname, lname)
-        

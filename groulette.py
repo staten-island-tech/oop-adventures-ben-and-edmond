@@ -165,6 +165,3 @@ class roulette:
             else:
                 print("Invalid bet type. Try again.")
                 time.sleep(1)
-
-test = roulette(1000)
-test.start()
