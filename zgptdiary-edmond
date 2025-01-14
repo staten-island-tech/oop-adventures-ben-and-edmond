@@ -75,4 +75,4 @@ i had an indentation error i asked chatgpt to help, it looks the exact same, i j
 There were some problems that i didn't understand so i asked my brother to explain and help me, the major problem was running the map again after a game had been finished playing, this was sloved through seperating the map because the map file would run both the map and the game, it was seperated into main and map. 
 
 1/14
-how do i change it so when grammy gets mad the code doesnt clear like it would with the other games in the casino 
+how do i change it so when grammy gets mad the code doesnt clear like it would with the other games in the casino <---- didnt help I just added a time.sleep(1)
