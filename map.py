@@ -3,17 +3,19 @@ import gslots
 import groulette
 import gblackjack
 import gsnailracing
+import time
 class Person:
-  def __init__(self, fname, lname):
-    self.firstname = fname
-    self.lastname = lname
+    def __init__(self, fname, lname):
+        self.firstname = fname
+        self.lastname = lname
 class grandma(Person):
-  def __init__(self, fname, lname):
-    super().__init__(fname, lname)
+    def __init__(self, fname, lname):
+        super().__init__(fname, lname)
 
-  def scream(self):
-    print(self.firstname, self.lastname,":" "\nGET OUT OF MY MACHINE ")
-
+    def scream(self):
+        print(self.firstname, self.lastname,":" "\nGET AWAY FROM ME")
+    def scream_machine(self):
+        print(self.firstname, self.lastname,":" "\nGET AWAY FROM MY MACHINE")
 class Game:
     def __init__(self, rows, cols, money):
         self.rows = rows
@@ -97,10 +99,11 @@ class Game:
             elif self.player_pos in self.grammy_locations:
                 grammy_anger = grandma("Linda", "Smith")
                 grammy_anger.scream()
-                
+                time.sleep(1)
             elif self.player_pos in self.grammy_machine_locations:
-                print("GET AWAY FROM MY MACHINE")
-
+                grammy_anger = grandma("Linda", "Smith")
+                grammy_anger.scream_machine()
+                time.sleep(1)
 
         if game:
             game.start()
