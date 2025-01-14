@@ -72,7 +72,7 @@ how to add animation (learned the use of pygame.time.get_ticks)
 12/19 
 i had an indentation error i asked chatgpt to help, it looks the exact same, i just rewrote the code and it worked.
 1/3-1/4
-There were some problems that i didn't understand so i asked my brother to explain and help me, the major problem was running the map again after a game had been finished playing, this was sloved through seperating the map because the map file would run both the map and the game, it was seperated into main and map. 
+There were some problems that i didn't understand so i asked my brother to explain and help me, the major problem was running the map again after a game had been finished playing, this was sloved through seperating the map because the map file would run both the map and the game, it was seperated into main and map. AND instead of using break it return would return you to the map after displaying it again so instead of the map only running/displaying once it would display again because its in a while loop and the code returns back.
 
 1/14
 how do i change it so when grammy gets mad the code doesnt clear like it would with the other games in the casino <---- didnt help I just added a time.sleep(1)
