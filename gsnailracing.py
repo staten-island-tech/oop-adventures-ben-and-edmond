@@ -18,6 +18,11 @@ class snail:
         self.horse3_pos = [2,0]
         self.horse4_pos = [3,0]
         self.horse5_pos = [4,0]
+        self.top_left = "┌"
+        self.top_right = "┐"
+        self.bottom_left = "└"
+        self.bottom_right = "┘"
+        self.horizontal_border = "-" * (self.cols + 5)
         print(f"Your starting balance is ${self.money}.\n")
     
     @staticmethod
