@@ -18,11 +18,6 @@ class snail:
         self.horse3_pos = [2,0]
         self.horse4_pos = [3,0]
         self.horse5_pos = [4,0]
-        self.top_left = "┌"
-        self.top_right = "┐"
-        self.bottom_left = "└"
-        self.bottom_right = "┘"
-        self.horizontal_border = "-" * (self.cols + 5)
         print(f"Your starting balance is ${self.money}.\n")
     
     @staticmethod
@@ -145,8 +140,8 @@ class snail:
     def payout(self):
 
         if color_input == self.check_win():
-            self.money = self.money + amount_input*2.5
-            print(f"You won $",amount_input*2.5)
+            self.money = self.money + amount_input*1.5
+            print(f"You won $",amount_input*1.5)
         else:
             self.money = self.money - amount_input
             print(f"You lost $",amount_input)
